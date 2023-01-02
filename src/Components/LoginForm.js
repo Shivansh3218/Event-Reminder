@@ -16,17 +16,21 @@ const Login = () => {
   const visiblity = () => {
     setPasswordShown(!passwordShown);
   };
+
   const dispatching = useDispatch();
   const signedInUser = useSelector((state) => {
     return state.auth.signUpUser;
   });
+
   const handleUser = (values) => {
     dispatching(authActions.signUp(values));
     handleSignUp();
   };
+
   const handleSignUp = () => {
     setSignUp(!signUp);
   };
+
 
   const handleBack = () => {
     setSignUp(!signUp);
@@ -41,6 +45,7 @@ const Login = () => {
       );
     });
 
+    console.log(authActions.login())
     if (result[0]) {
       dispatching(authActions.login({ ...result[0] }));
       navigate("/");
@@ -51,13 +56,24 @@ const Login = () => {
       }
     }
   };
+  const handleGuest=(e)=>{
+    navigate("/");
+    dispatching(authActions.login({
+      firstName: "Guest",
+      lastName: "Guest",
+      email: "ninjaitachi123@gmail.com",
+      password: "ASDFGHJK",
+      confirmPassword: "ASDFGHJK",
+    }));
+
+  }
 
   return (
     <>
       <div className="login_page">
         <img src="./assets/logo.png" alt="logo" width={500} />
         {!signUp ? (
-          <Card style={{ backgroundColor: "rgb(196,199,207)", width: "300px" }}>
+          <Card style={{ backgroundColor: "rgb(196,199,207)", width: "32%" }}>
             <h2>Login</h2>
             <form onSubmit={handleLogin}>
               <div className="jk">
@@ -97,9 +113,12 @@ const Login = () => {
                 </span>
               </div>
 
-              <div className="btndiv">
+              <div className="btndiv" >
                 <span onClick={handleLogin}>
                   <Button type="primary">Login</Button>
+                </span>
+                <span onClick={handleGuest}>
+                  <Button type="primary">Guest Login</Button>
                 </span>
                 <span onClick={handleSignUp}>
                   <Button type="primary">Sign Up</Button>

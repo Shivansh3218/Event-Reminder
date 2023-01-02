@@ -93,7 +93,7 @@ const LayoutComponent = () => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item>Hello {logedInUser.firstName} !</Breadcrumb.Item>
+            <Breadcrumb.Item>Hello {logedInUser?logedInUser.firstName:<p>Guest</p>} !</Breadcrumb.Item>
           </Breadcrumb>
           <div
             style={{
