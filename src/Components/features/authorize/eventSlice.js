@@ -22,6 +22,7 @@ const eventSlice = createSlice({
                 if(parseInt(e.id) === parseInt(updatedEvent.id)){
                     return updatedEvent
                 }
+                else return e
             })
             console.log({newEvents})
             localStorage.setItem('events', JSON.stringify(newEvents))
